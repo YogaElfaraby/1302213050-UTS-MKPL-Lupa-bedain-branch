@@ -41,4 +41,10 @@ public class TaxFunction {
 			 
 	}
 	
+	private static void validateMonthsWorked(int numberOfMonthsWorked) {
+        if (numberOfMonthsWorked > 12) {
+            throw new IllegalArgumentException("Number of months worked cannot exceed 12 per year.");
+        }
+    }
+	
 }
