@@ -1,7 +1,6 @@
 package lib;
 
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -52,24 +51,35 @@ public class Employee {
 	 * Jika pegawai adalah warga negara asing gaji bulanan diperbesar sebanyak 50%
 	 */
 	
-	public void setMonthlySalary(int grade) {	
-		if (grade == 1) {
-			monthlySalary = 3000000;
-			if (isForeigner) {
-				monthlySalary = (int) (3000000 * 1.5);
-			}
-		}else if (grade == 2) {
-			monthlySalary = 5000000;
-			if (isForeigner) {
-				monthlySalary = (int) (3000000 * 1.5);
-			}
-		}else if (grade == 3) {
-			monthlySalary = 7000000;
-			if (isForeigner) {
-				monthlySalary = (int) (3000000 * 1.5);
-			}
-		}
-	}
+    // Set gaji bulanan berdasarkan grade
+    public void setMonthlySalary(int grade) {
+        calculateBaseMonthlySalary(grade);
+        applyForeignerBonus();
+    }
+
+    // Hitung gaji bulanan dasar
+    private void calculateBaseMonthlySalary(int grade) {
+        switch (grade) {
+            case 1:
+                monthlySalary = 3000000;
+                break;
+            case 2:
+                monthlySalary = 5000000;
+                break;
+            case 3:
+                monthlySalary = 7000000;
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid grade: " + grade);
+        }
+    }
+
+    // Terapkan bonus untuk warga negara asing
+    private void applyForeignerBonus() {
+        if (isForeigner) {
+            monthlySalary *= 1.5;
+        }
+    }
 	
 	public void setAnnualDeductible(int deductible) {	
 		this.annualDeductible = deductible;
